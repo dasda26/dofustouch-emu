@@ -1,9 +1,18 @@
+# Jetbrains files
 .idea/
 *.iml
+
+# Npm files
 *.log
 node_modules/
+
+# macOS files
 .DS_Store
+
+# Build files
 dist/
-app/ui/
-app/javascript/dofus.js
-app/stylesheet/dofus.css
+build/ui/
+build/assets/
+
+# Other files
+app/

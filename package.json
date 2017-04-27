@@ -7,8 +7,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "webpack:build": "webpack -p --display-error-details --colors",
+    "webpack:watch": "webpack -p --display-error-details --colors --watch",
     "install": "node dofus_installer.js",
-    "dofus:install": "node dofus_installer.js",
     "dist:mac": "build --mac",
     "dist:win": "build --win --ia32"
   },
@@ -17,12 +18,20 @@
     "productName": "DofusTouchEmu"
   },
   "dependencies": {
-    "browser-es-module-loader": "^0.2.0",
-    "jquery": "^3.1.1"
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.0",
     "electron": "^1.4.13",
     "electron-builder": "next",
-    "node-fetch": "^1.6.3"
+    "extract-text-webpack-plugin": "^2.1.0",
+    "node-fetch": "^1.6.3",
+    "style-loader": "^0.16.1",
+    "webpack": "^2.4.1"
   }
 }

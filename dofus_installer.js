@@ -14,7 +14,7 @@ fetch("https://proxyconnection.touch.dofus.com/build/script.js").then(function (
         return res.json();
     }).then((content) => {
         fs.writeFileSync(
-            "./app/javascript/dofus.js",
+            "./build/assets/dofus.js",
             data.replace(assetRegex, "..")
                 .replace(versionRegex, ",appVersion: \"" + content["results"][0]["version"] + "\",")
                 .replace(overrideConsoleRegex, "_.overrideConsole=function(){},"));
@@ -29,7 +29,7 @@ fetch("https://proxyconnection.touch.dofus.com/build/styles-native.css").then(fu
     console.log("Downloading dofus.css...");
     return res.text();
 }).then(function (data) {
-    fs.writeFileSync("./app/stylesheet/dofus.css", data.replace(assetRegex, ".."));
+    fs.writeFileSync("./build/assets/dofus.css", data.replace(assetRegex, ".."));
 }).catch(function (err) {
     console.log(err);
 });
@@ -50,7 +50,7 @@ function downloadAsset(fileName) {
         destinationArray.shift();
         destinationArray.shift();
         let destinationFileName = destinationArray.pop();
-        let destinationFolder = "app/ui/" + destinationArray.toString().replace(",", "/");
+        let destinationFolder = "build/ui/" + destinationArray.toString().replace(",", "/");
         let destination = destinationFolder + "/" + destinationFileName;
 
         console.log("Downloading " + destination + "...");

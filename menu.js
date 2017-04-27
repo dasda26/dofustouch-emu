@@ -39,16 +39,6 @@ module.exports = class Menu {
             label: "Jeu",
             submenu: [
                 {
-                    label: "Nouvelle fenêtre",
-                    accelerator: "CommandOrControl+N",
-                    click () {
-                        main.newGameWindow();
-                    }
-                },
-                {
-                    type: "separator"
-                },
-                {
                     label: "Console de développeur",
                     accelerator: process.platform === "darwin" ? "Alt+Command+I" : "Ctrl+Shift+I",
                     click (item, focusedWindow) {

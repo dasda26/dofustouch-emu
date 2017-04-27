@@ -13,10 +13,9 @@ Téléchargement disponible [ici](https://github.com/remicaumette/dofustouch-emu
 Vous aurez besoin de [NodeJS v7.x](https://nodejs.org/en/download/current/) pour suivre cette procédure.
 
 ```sh
-$  git clone git@github.com:remicaumette/dofustouch-emu.git
+$  git clone https://github.com/remicaumette/dofustouch-emu.git
 $  cd dofustouch-emu/
 $  npm install
-$  npm run dofus:install
 $  npm start
 ```
 
