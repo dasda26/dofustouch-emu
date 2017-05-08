@@ -13,7 +13,7 @@ export default class GameTabs extends Component {
 
     addTab() {
         let tabs = [...this.state.tabs];
-        tabs.push({online: false, characterName: undefined});
+        tabs.push({characterName: undefined});
         let activeTab = tabs.length - 1;
 
         this.setState({
@@ -40,17 +40,21 @@ export default class GameTabs extends Component {
         alert("Indisponible pour le moment.");
     }
 
-    render() {
+    componentWillMount() {
         if (!this.state.tabs.length) {
             this.addTab();
         }
+    }
+
+    render() {
+        console.log("rendering");
 
         return (
             <div className="game-tabs">
                 <ul className="game-tabs-nav">
                     {this.state.tabs.map((element, index) =>
                         <li key={"game-link-" + index} className={"game-tabs-nav-link " + (this.state.activeTab == index ? "active" : "")} onClick={this.switchTab.bind(this, index)}>
-                            {element.online ? element.characterName : "Non connecté"}
+                            {element.characterName ? element.characterName : "Non connecté"}
                         </li>
                     )}
 
@@ -70,7 +74,7 @@ export default class GameTabs extends Component {
                 </ul>
 
                 {this.state.tabs.map((element, index) =>
-                    <GamePane key={"game-content-" + index} id={index} active={this.state.activeTab == index}/>)}
+                    <GamePane key={"game-content-" + index} id={index} active={this.state.activeTab == index} parent={this}/>)}
             </div>
         )
     }

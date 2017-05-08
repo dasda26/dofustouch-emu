@@ -24,6 +24,15 @@ export default class GamePane extends Component {
             resizeWebview();
             webdom.openDevTools();
         });
+
+        webdom.addEventListener("ipc-message", (event) => {
+            console.log(event);
+            console.log(this.props)
+
+            let tabs = this.props.parent.state.tabs;
+            tabs[this.props.id].characterName = event.channel;
+            this.props.parent.setState({tabs});
+        });
     }
 
     render() {

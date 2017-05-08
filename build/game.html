@@ -185,6 +185,7 @@
 
                 window.gui.on("disconnect", () => {
                     isOnline = false;
+                    ipcRenderer.sendToHost(undefined);
                     document.title = "DofusTouchEmu";
                 });
 
@@ -194,6 +195,7 @@
                             isOnline = true;
                             //document.querySelector(".shopBtn.Button").parent().hide();
                             document.title = data.infos.name;
+                            ipcRenderer.sendToHost(data.infos.name);
                             break;
                         case "ChatServerMessage":
                             if (data.channel == 9) sendNotification("Message de " + data.senderName + " : " + data.content);

@@ -7,6 +7,7 @@ app.on("ready", () => {
     let window = new BrowserWindow({
         width: 1128,
         height: 649,
+        plugins: true
     });
     window.loadURL("file://" + __dirname + "/build/index.html");
 });
