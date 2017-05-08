@@ -1,23 +1,29 @@
-import React from "react"
+import React, {Component} from "react"
 
-export default class GamePane extends React.Component {
+export default class GamePane extends Component {
     constructor(props) {
         super(props);
     }
 
     componentDidMount() {
-        const webview = document.getElementById("game-" + this.props.id);
-        webview.addEventListener("dom-ready", () => {
-            webview.openDevTools();
+        const webview = window.jQuery("#game-" + this.props.id);
+        const body = window.jQuery("body");
+        const webdom = document.getElementById("game-" + this.props.id);
+
+        webdom.addEventListener("dom-ready", () => {
+            function resizeWebview() {
+                webview.attr({
+                    width: body.width(),
+                    height: body.height() - window.jQuery(".game-tabs-nav").height()
+                });
+                webview.height(body.height() - window.jQuery(".game-tabs-nav").height());
+                webdom.send("resize");
+            }
+
+            window.addEventListener("resize", resizeWebview);
+            resizeWebview();
+            webdom.openDevTools();
         });
-
-        function resizeWebview() {
-            webview.style.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-            webview.style.height = (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) - parseInt(window.getComputedStyle(document.querySelector(".game-tabs-nav")).height.replace("px", ""));
-        }
-
-        window.addEventListener("resize", resizeWebview);
-        resizeWebview();
     }
 
     render() {
@@ -30,7 +36,6 @@ export default class GamePane extends React.Component {
                 useragent="Mozilla/5.0 (Linux; Android 6.0; FEVER Build/MRA58K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36"
                 disablewebsecurity
                 nodeintegration
-                autoresize
                 allowpopups>
             </webview>
         )

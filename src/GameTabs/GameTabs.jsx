@@ -1,7 +1,7 @@
-import React from "react";
+import React, {Component} from "react";
 import GamePane from "../GamePane/GamePane";
 
-export default class GameTabs extends React.Component {
+export default class GameTabs extends Component {
     constructor(props) {
         super(props);
 
@@ -9,10 +9,6 @@ export default class GameTabs extends React.Component {
             activeTab: 0,
             tabs: []
         };
-    }
-
-    componentDidMount() {
-        this.addTab();
     }
 
     addTab() {
@@ -26,29 +22,55 @@ export default class GameTabs extends React.Component {
         });
     }
 
-    removeTab(tab) {
+    removeTab() {
+        let tabs = this.state.tabs.filter((element, index) => index != this.state.activeTab);
+        let activeTab = tabs.length - 1;
 
+        this.setState({
+            activeTab,
+            tabs
+        });
     }
 
     switchTab(activeTab) {
         this.setState({activeTab});
     }
 
+    openSettings() {
+        alert("Indisponible pour le moment.");
+    }
+
     render() {
+        if (!this.state.tabs.length) {
+            this.addTab();
+        }
+
         return (
             <div className="game-tabs">
                 <ul className="game-tabs-nav">
                     {this.state.tabs.map((element, index) =>
-                        <li className="game-tabs-nav-btn" onClick={this.switchTab.bind(this, index)}>
-                            <a>{element.online ? element.characterName : "Non connecté"}</a>
+                        <li key={"game-link-" + index} className={"game-tabs-nav-link " + (this.state.activeTab == index ? "active" : "")} onClick={this.switchTab.bind(this, index)}>
+                            {element.online ? element.characterName : "Non connecté"}
                         </li>
                     )}
-                    <li className="game-tabs-nav-btn" onClick={this.addTab.bind(this)}>
-                        <a>ajouter un onglet</a>
-                    </li>
+
+                    <div className="right">
+                        <li className="game-tabs-nav-link add-tab" onClick={this.addTab.bind(this)}>
+                            <i className="fa fa-plus"></i>
+                        </li>
+
+                        <li className="game-tabs-nav-link remove-tab" onClick={this.removeTab.bind(this)}>
+                            <i className="fa fa-trash"></i>
+                        </li>
+
+                        <li className="game-tabs-nav-link open-settings" onClick={this.openSettings.bind(this)}>
+                            <i className="fa fa-cog"></i>
+                        </li>
+                    </div>
                 </ul>
 
-                {this.state.tabs.map((element, index) => <GamePane id={index} active={this.state.activeTab == index}/>)}
+                {this.state.tabs.map((element, index) =>
+                    <GamePane key={"game-content-" + index} id={index} active={this.state.activeTab == index}/>)}
             </div>
         )
     }

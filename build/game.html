@@ -9,6 +9,8 @@
     <body>
         <script type="text/javascript" src="assets/dofus.js"></script>
         <script type="text/javascript">
+            const {ipcRenderer} = require("electron");
+
             Array.prototype.last = function () {
                 return this[this.length - 1];
             };
@@ -25,6 +27,7 @@
                     }
                 }
 
+                ipcRenderer.on("resize", () => window.gui._resizeUi());
                 window.addEventListener("focus", () => focused = true);
                 window.addEventListener("blur", () => focused = false);
                 window.addEventListener("resize", () => window.gui._resizeUi());

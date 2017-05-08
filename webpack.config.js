@@ -14,7 +14,6 @@ module.exports = {
         rules: [
             {
                 test: [/\.js$/, /\.jsx$/],
-                exclude: [/node_modules/],
                 use: [{
                     loader: "babel-loader",
                     options: {presets: ["es2015", "react"]},
@@ -22,10 +21,13 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                exclude: [/node_modules/],
                 loader: ExtractTextPlugin.extract({
                     use: "css-loader?importLoaders=1",
                 })
+            },
+            {
+                test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                loader: 'file-loader?name=fonts/[name].[ext]'
             }
         ]
     },
