@@ -4,8 +4,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: "./src/index.js",
     output: {
-        path: path.resolve(__dirname, "build/assets/"),
-        filename: "bundle.js",
+        path: path.resolve(__dirname, "public/assets/"),
+        filename: "app.js",
     },
     resolve: {
         extensions: [".js", ".jsx", ".css"]
@@ -33,7 +33,7 @@ module.exports = {
     },
     plugins: [
         new ExtractTextPlugin({
-            filename: "bundle.css",
+            filename: "app.css",
             allChunks: true
         })
     ]

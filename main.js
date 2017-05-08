@@ -9,7 +9,7 @@ app.on("ready", () => {
         height: 649,
         plugins: true
     });
-    window.loadURL("file://" + __dirname + "/build/index.html");
+    window.loadURL("file://" + __dirname + "/public/index.html");
 });
 
 app.on("window-all-closed", () => {

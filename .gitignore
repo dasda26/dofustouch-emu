@@ -11,8 +11,7 @@ node_modules/
 
 # Build files
 dist/
-build/ui/
-build/assets/
+public/assets/
 
 # Other files
 app/
