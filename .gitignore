@@ -10,8 +10,7 @@ node_modules/
 .DS_Store
 
 # Build files
-dist/
-views/assets/
+assets/
 
 # Other files
 app/
