@@ -4,8 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
-        index: path.join(__dirname, "src", "index.jsx"),
-        game: path.join(__dirname, "src", "game.jsx")
+        index: path.join(__dirname, "src", "index.jsx")
     },
     output: {
         path: path.join(__dirname, "assets"),
