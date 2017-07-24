@@ -14,7 +14,7 @@ Vous aurez besoin de [NodeJS v7.x](https://nodejs.org/en/download/current/) pour
 
 ```sh
 $  git clone https://github.com/remicaumette/dofustouch-emu.git
-$  cd dofustouch-emu/
+$  cd dofustouch-emu
 $  npm install
 $  npm start
 ```

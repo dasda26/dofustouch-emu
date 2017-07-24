@@ -1,40 +1,54 @@
 const path = require("path");
+const {ProvidePlugin} = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: {
+        index: path.join(__dirname, "src", "index.jsx"),
+        game: path.join(__dirname, "src", "game.jsx")
+    },
     output: {
-        path: path.resolve(__dirname, "public/assets/"),
-        filename: "app.js",
+        path: path.join(__dirname, "assets"),
+        filename: "[name].js"
     },
     resolve: {
-        extensions: [".js", ".jsx", ".css"]
+        extensions: [".js", ".jsx", ".less"]
     },
     module: {
-        rules: [
-            {
-                test: [/\.js$/, /\.jsx$/],
+        rules: [{
+            test: [/\.js$/, /\.jsx$/],
+            use: [{
+                loader: "babel-loader",
+                options: {
+                    presets: ["es2015", "react"]
+                }
+            }]
+        }, {
+            test: /\.less$/,
+            loader: ExtractTextPlugin.extract({
                 use: [{
-                    loader: "babel-loader",
-                    options: {presets: ["es2015", "react"]},
+                    loader: "css-loader",
+                    options: {
+                        url: true,
+                        minimize: true
+                    }
+                }, {
+                    loader: "less-loader"
                 }]
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    use: "css-loader?importLoaders=1",
-                })
-            },
-            {
-                test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-                loader: 'file-loader?name=fonts/[name].[ext]'
-            }
-        ]
+            })
+        }, {
+            test: /\.(jpe?g|png|gif|svg|otf|eot|ttf|woff2?)$/i,
+            loader: "file-loader"
+        }]
     },
     plugins: [
         new ExtractTextPlugin({
-            filename: "app.css",
+            filename: "[name].css",
             allChunks: true
+        }),
+        new ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
         })
     ]
 };
